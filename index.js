@@ -4,42 +4,65 @@ const axios = require('axios');
 const cors = require('cors');
 
 const app = express();
-// Render sẽ tự động cung cấp một biến môi trường PORT.
-// Nếu chạy local, nó sẽ dùng cổng 3000.
 const PORT = process.env.PORT || 3000;
 
-// Sử dụng middleware cors để cho phép yêu cầu từ mọi nguồn gốc
 app.use(cors());
 
-// Route chính để kiểm tra server có hoạt động không
 app.get('/', (req, res) => {
-    res.send('Có cái đàu cu bố may nè bú không con 🤣😂.');
+    res.send('Ước Bị Bú Api haizzzz tội mấy bé nghèo đéo có tiền mua api xài quá haizzzz 😂😂😅🤣😆🤣😊🥲☺️🤗😗🤗😗🥰🙃🥲🙃🤗😗🤑🤪😚🤪😊🤔😙🥲🙃🥰😜😙🤔🤑🤔😙🤭🤔🤨🤔🤐🤔🤐🥰🤪!');
 });
 
-// Endpoint để frontend gọi vào, lấy dữ liệu dự đoán
-app.get('/bomaylavuakaka', async (req, res) => {
+// === ENDPOINT 1: API DỰ ĐOÁN (CÁI CŨ) ===
+app.get('/hitclubmd5', async (req, res) => {
     try {
-        console.log('Received request, forwarding to the target API...');
-        
-        const TARGET_API_URL = 'https://api-sunwin-prolayer.onrender.com/predict_vip';
-
+        const TARGET_API_URL = 'https://api-hitclub-aipro-vannhat.onrender.com/api/taixiumd5';
         const apiResponse = await axios.get(TARGET_API_URL);
-
-        console.log('Successfully fetched data, sending back to client.');
-        // Gửi dữ liệu nhận được từ API gốc về lại cho frontend
         res.json(apiResponse.data);
-
     } catch (error) {
-        // Ghi lại lỗi chi tiết hơn trên server log
-        console.error('Error while fetching from target API:', error.message);
-        res.status(500).json({ 
-            message: 'Error connecting to the prediction API.',
-            error: error.message 
-        });
+        console.error('Lỗi API dự đoán:', error.message);
+        res.status(500).json({ message: 'Lỗi kết nối API dự đoán' });
     }
 });
 
-// Khởi chạy server
+// === ENDPOINT 2: API LẤY THÔNG TIN NGƯỜI DÙNG (CÁI MỚI) ===
+app.get('/hitclub', async (req, res) => {
+    try {
+        // Thay bằng URL API thực tế của bạn
+        const TARGET_API_URL = 'https://api-hitclub-aipro-vannhat.onrender.com/api/taixiu'; 
+        const apiResponse = await axios.get(TARGET_API_URL);
+        res.json(apiResponse.data);
+    } catch (error) {
+        console.error('Lỗi API người dùng:', error.message);
+        res.status(500).json({ message: 'Lỗi kết nối API người dùng' });
+    }
+});
+
+// === ENDPOINT 3: API LẤY TIN TỨC GAME (CÁI MỚI) ===
+app.get('/lc79md5', async (req, res) => {
+    try {
+        // Thay bằng URL API thực tế của bạn
+        const TARGET_API_URL = 'https://api-lc79-md5-win.onrender.com/api/taixiu/predict';
+        const apiResponse = await axios.get(TARGET_API_URL);
+        res.json(apiResponse.data);
+    } catch (error) {
+        console.error('Lỗi API tin tức:', error.message);
+        res.status(500).json({ message: 'Lỗi kết nối API tin tức' });
+    }
+});
+// === ENDPOINT 3: API LẤY TIN TỨC GAME (CÁI MỚI) ===
+app.get('/sunwin', async (req, res) => {
+    try {
+        // Thay bằng URL API thực tế của bạn
+        const TARGET_API_URL = 'https://api-sunwin-prolayer.onrender.com/predict_vip';
+        const apiResponse = await axios.get(TARGET_API_URL);
+        res.json(apiResponse.data);
+    } catch (error) {
+        console.error('Lỗi API tin tức:', error.message);
+        res.status(500).json({ message: 'Lỗi kết nối API tin tức' });
+    }
+});
+
+
 app.listen(PORT, () => {
     console.log(`Server is listening on port ${PORT}`);
 });
